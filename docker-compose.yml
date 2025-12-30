@@ -1,0 +1,12 @@
+services:
+  claude-server:
+    build: .
+    restart: always
+    container_name: claude-ssh-server
+    ports:
+      - "8012:22"
+    volumes:
+      - claude-config:/home/claudeuser/.claude
+      - ./workspace:/workspace
+volumes:
+  claude-config:
