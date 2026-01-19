@@ -8,9 +8,10 @@ RUN apt-get update && apt-get install -y \
     curl \
     bash \
     openssh-server \
+    nano \
     && rm -rf /var/lib/apt/lists/*
 
-RUN npm install -g @anthropic-ai/claude-code
+RUN npm install -g @anthropic-ai/claude-code && npm install -g @google/gemini-cli && npm install -g @openai/codex
 
 RUN groupadd -r claudeuser && \
     useradd -r -g claudeuser -m -s /bin/bash claudeuser && \

@@ -4,9 +4,24 @@ services:
     restart: always
     container_name: claude-ssh-server
     ports:
-      - "8012:22"
+      - "3010:22"
     volumes:
-      - claude-config:/home/claudeuser/.claude
-      - ./workspace:/workspace
-volumes:
-  claude-config:
+      - ./claude-config:/home/claudeuser/
+      - C:/n8n/download:/workspace
+    environment:
+      - ANTHROPIC_BASE_URL=http://claude-code-monitor:3001
+
+  claude-code-monitor:
+    build: ./claude-code-monitor
+    restart: always
+    ports:
+      - "127.0.0.1:3011:3001"
+      - "127.0.0.1:3012:5173"
+    volumes:
+      - ./proxy-data:/app/data
+      - ./claude-code-monitor/config.yaml:/app/config.yaml:ro
+    environment:
+      - ANTHROPIC_FORWARD_URL=https://api.anthropic.com
+      - PORT=3001
+      - WEB_PORT=5173
+      - DB_PATH=/app/data/requests.db
