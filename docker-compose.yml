@@ -7,7 +7,7 @@ services:
       - "3010:22"
     volumes:
       - ./claude-config:/home/claudeuser/
-      - C:/n8n/download:/workspace
+      - C:/n8n/download:/workspace  # Linux: /path/to/n8n/download
     environment:
       - ANTHROPIC_BASE_URL=http://claude-code-monitor:3001
 

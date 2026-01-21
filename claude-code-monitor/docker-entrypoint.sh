@@ -5,6 +5,9 @@
 
 set -e
 
+mkdir -p /app/data
+chown -R appuser:appgroup /app/data
+
 echo "🚀 Starting Claude Code Proxy services..."
 echo "========================================="
 

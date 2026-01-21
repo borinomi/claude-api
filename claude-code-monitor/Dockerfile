@@ -42,11 +42,11 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Install runtime dependencies
-RUN apk add --no-cache sqlite wget
+RUN apk add --no-cache sqlite wget su-exec
 
-# Create app user for security
-RUN addgroup -g 1001 -S appgroup && \
-    adduser -S appuser -u 1001 -G appgroup
+RUN deluser --remove-home node && \
+    addgroup -g 1000 -S appgroup && \
+    adduser -S appuser -u 1000 -G appgroup
 
 # Copy built Go binary
 COPY --from=go-builder /app/bin/proxy ./bin/proxy
@@ -77,9 +77,6 @@ ENV DB_PATH=/app/data/requests.db
 
 # Expose ports
 EXPOSE 3001 5173
-
-# Switch to app user
-USER appuser
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
