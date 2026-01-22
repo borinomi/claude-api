@@ -15,8 +15,8 @@ services:
     build: ./claude-code-monitor
     restart: always
     ports:
-      - "127.0.0.1:3011:3001"
-      - "127.0.0.1:3012:5173"
+      - "3011:3001"
+      - "3012:5173"
     volumes:
       - ./proxy-data:/app/data
       - ./claude-code-monitor/config.yaml:/app/config.yaml:ro
