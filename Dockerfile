@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     nano \
     && rm -rf /var/lib/apt/lists/*
 
-RUN npm install -g @anthropic-ai/claude-code && npm install -g @google/gemini-cli && npm install -g @openai/codex
+RUN npm install -g @anthropic-ai/claude-code && npm install -g @google/gemini-cli && npm install -g @openai/codex && npm install -g opencode-ai
 
 RUN userdel -r node && \
     groupadd -g 1000 claudeuser && \
